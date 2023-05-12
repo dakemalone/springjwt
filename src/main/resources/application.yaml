@@ -1,0 +1,49 @@
+lc:
+  security:
+    permit-static:
+      - /*.html
+      - /*.html
+      - /favicon.ico
+      - /**/*.html
+      - /**/*.css
+      - /**/*.js
+      - /**/*.png
+      - /**/*.jpg
+      - /**/*.ttf
+      - /**/*.woff
+      - /**/*.wav
+      - /**/*.gif
+      - /swagger-ui.html
+      - /login
+    permit-method:
+      - /hello
+      - /swagger-resources
+      - /v2/api-docs
+      - /v3/api-docs
+      - /api/v1/sys/auth/login
+    jwt:
+      auth-header: Authorization
+      secret: fdsafjsdie
+      type: forever
+      claims:
+        issuer: LC
+        audience: Web
+        subject: Auth
+        expiration-time-minutes: 3000
+spring:
+  redis:
+    host: localhost
+    port: 6379
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: dake
+    url: jdbc:mysql://localhost:3306/smt?characterEncoding=utf-8
+  main:
+    allow-bean-definition-overriding: true
+server:
+  port: 8080
+
+logging:
+  level:
+    web: debug

@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.11'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+//    spring security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+//    hutool工具类
+    implementation 'cn.hutool:hutool-all:5.8.15'
+//生产验证码
+    implementation 'com.github.axet:kaptcha:0.0.9'
+
+    implementation 'commons-lang:commons-lang:2.6'
+    implementation 'commons-codec:commons-codec:1.15'
+//    redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+//数据库相关
+    implementation 'mysql:mysql-connector-java:8.0.32'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc'
+//
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+//    缓存不太用，用redis代替
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-cache'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.projectlombok:lombok'
+//    jsonwebtoken
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5',
+            // Uncomment the next line if you want to use RSASSA-PSS (PS256, PS384, PS512) algorithms:
+            //'org.bouncycastle:bcprov-jdk15on:1.70',
+            'io.jsonwebtoken:jjwt-jackson:0.11.5' // or 'io.jsonwebtoken:jjwt-gson:0.11.5' for gson
+
+//    fastjson
+    implementation group: 'com.alibaba', name: 'fastjson', version: '2.0.29'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
