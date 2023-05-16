@@ -33,7 +33,6 @@ public class BaseController {
 
     @PostMapping("/login")
     public Result login(@RequestParam String username, @RequestParam String password){
-
         return Result.succ(null);
     }
 

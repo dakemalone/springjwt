@@ -1,14 +1,14 @@
 package com.example.springsecurityjwt.config;
 
-import com.example.springsecurityjwt.exception.UserAuthenticationEntryPoint;
+import com.example.springsecurityjwt.exception.JwtAuthenticationEntryPoint;
+
 import com.example.springsecurityjwt.filter.CaptchaFilter;
 import com.example.springsecurityjwt.filter.JwtAuthenticationFilter;
 import com.example.springsecurityjwt.filter.LoginFilter;
 import com.example.springsecurityjwt.handler.LoginFailureHandler;
 import com.example.springsecurityjwt.handler.LoginSuccessHandler;
 import com.example.springsecurityjwt.properties.AuthProperties;
-import com.example.springsecurityjwt.service.JwtService;
-import com.example.springsecurityjwt.service.impl.JwtServiceImpl;
+
 import com.example.springsecurityjwt.service.impl.SysUserServiceImpl;
 import com.example.springsecurityjwt.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +18,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.authentication.configuration.GlobalAuthenticationConfigurerAdapter;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserCache;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -120,8 +117,6 @@ public class WebSecurityConfig {
                 .csrf().disable()
                 //登录配置
                 .formLogin()
-//                .successHandler(loginSuccessHandler)
-//                .failureHandler(loginFailureHandler)
                 .and()
                 // 基于 token，不需要 session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
@@ -138,7 +133,7 @@ public class WebSecurityConfig {
                 // 将captcha过滤器配置在UsernamePasswordAuthenticationFilter之前
                 .addFilterBefore(captchaFilter,UsernamePasswordAuthenticationFilter.class)
                 .addFilterAt(loginFilter(http.getSharedObject(AuthenticationManager.class)), UsernamePasswordAuthenticationFilter.class)
-                .exceptionHandling().authenticationEntryPoint(new UserAuthenticationEntryPoint())
+                .exceptionHandling().authenticationEntryPoint(new JwtAuthenticationEntryPoint())
                 .and()
                 // 认证用户时用户信息加载配置，注入springAuthUserService
                 .userDetailsService(sysUserService).build();

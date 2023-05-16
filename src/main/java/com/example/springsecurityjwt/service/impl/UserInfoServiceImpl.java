@@ -23,7 +23,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     /**
      * get one
-     *
      * @param id
      * @return com.example.springsecurityjwt.pojo.UserInfo
      * @author dake malone

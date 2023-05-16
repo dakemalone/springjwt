@@ -79,9 +79,9 @@ public class JwtUtil {
      * 生成JWT
      * @author dake malone
      * @date 11/5/2023 上午 11:08
-     * @param
+     * @param username
      *
-     * @return null
+     * @return String
      */
     public String generateToken(String username) throws NoSuchAlgorithmException {
         Map<String, Object> map = new HashMap<String, Object>(2048) {

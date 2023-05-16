@@ -244,7 +244,6 @@ public class RedisUtil implements ApplicationContextAware {
             }
             return result;
         }
-
         /**
          * 找到所有匹配pattern的key,并返回该key的结合.
          *

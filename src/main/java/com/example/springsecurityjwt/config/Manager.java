@@ -27,7 +27,6 @@ public class Manager {
     @Autowired
     private CacheManager cacheManager;
 
-
     @Bean(name = "userCache")
     UserCache userCache(){
         Cache ca = cacheManager.getCache("userCache");

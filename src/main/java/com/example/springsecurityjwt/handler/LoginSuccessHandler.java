@@ -43,7 +43,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         String jwt;
         try {
             jwt = jwtUtil.generateToken(authentication.getName());
-            log.info("jwt----{}",jwt);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }

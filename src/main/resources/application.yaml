@@ -16,7 +16,6 @@ lc:
       - /swagger-ui.html
       - /login
     permit-method:
-      - /hello
       - /swagger-resources
       - /v2/api-docs
       - /v3/api-docs
